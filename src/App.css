@@ -1,0 +1,23 @@
+.app{
+  background-image: url('./Assets/hero-image-wr.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+}
+
+.logoContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0px;
+}
+
+.logoContainer img {
+  height: 30px;
+}
+
+.searchContainer{
+  background-color: #282B30;
+  border-radius: 50px;
+  height: 100%;
+}
