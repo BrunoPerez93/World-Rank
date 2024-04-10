@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { getCountries } from "../../Helpers/getCountries";
 import TableCountries from "../TableCountries/TableCountries";
 import ButtonComponnent from "../Common/ButtonComponnent";
+import CheckboxGroup from "../Common/CheckboxGroup";
 
 export const Filters = () => {
 
   const [selectOption, setSelectOption] = useState('');
   const [countries, setCountries] = useState([]);
+  const [selectedRegion, setSelectedRegion] = useState([]);
+  const [filterIndependent, setFilterIndependent] = useState(false);
+  const [filterUNMember, setFilterUNMember] = useState(false);
 
   useEffect(() => {
     async function FetchData() {
@@ -21,9 +25,21 @@ export const Filters = () => {
   }, [])
 
   const handleRegionFilter = (region) => {
-    const filteredCountries = countries.filter(country => country.region === region);
-    setCountries(filteredCountries);
+    if (selectedRegion.includes(region)) {
+      setSelectedRegion(selectedRegion.filter(selected => selected !== region));
+    } else {
+      setSelectedRegion([...selectedRegion, region]);
+    }
   };
+
+  const handleCheckboxChange = (label) => {
+    if (label === "Member of the United Nations") {
+      setFilterUNMember(!filterUNMember);
+    } else if (label === "Independent") {
+      setFilterIndependent(!filterIndependent);
+    }
+  };
+
 
   return (
     <div className="w-full flex justify-between">
@@ -39,19 +55,32 @@ export const Filters = () => {
         <div className="pt-5">
           <p className="text-custom-light-gray py-5">Region</p>
           <div>
-            <ButtonComponnent region="America" onClick={handleRegionFilter} />
-            <ButtonComponnent region="Antarctic" onClick={handleRegionFilter} />
-            <ButtonComponnent region="Africa" onClick={handleRegionFilter} />
-            <ButtonComponnent region="Asia" onClick={handleRegionFilter} />
-            <ButtonComponnent region="Europe" onClick={handleRegionFilter} />
-            <ButtonComponnent region="Oceania" onClick={handleRegionFilter} />
+            <ButtonComponnent region="Americas" onClick={handleRegionFilter} selected={selectedRegion.includes("Americas")} />
+            <ButtonComponnent region="Antarctic" onClick={handleRegionFilter} selected={selectedRegion.includes("Antarctic")} />
+            <ButtonComponnent region="Africa" onClick={handleRegionFilter} selected={selectedRegion.includes("Africa")} />
+            <ButtonComponnent region="Asia" onClick={handleRegionFilter} selected={selectedRegion.includes("Asia")} />
+            <ButtonComponnent region="Europe" onClick={handleRegionFilter} selected={selectedRegion.includes("Europe")} />
+            <ButtonComponnent region="Oceania" onClick={handleRegionFilter} selected={selectedRegion.includes("Oceania")} />
           </div>
+        </div>
+
+        <div className="pt-5">
+          <p className="text-custom-light-gray py-5">Status</p>
+          <CheckboxGroup labels={["Member of the United Nations", "Independent"]} onChange={handleCheckboxChange} />
         </div>
 
       </div>
 
-      <div className="w-1/2">
-        <TableCountries selectOption={selectOption} countries={countries} />
+      <div className="w-full">
+      <TableCountries
+          selectOption={selectOption}
+          countries={countries.filter(country => {
+            let isRegionFiltered = selectedRegion.length === 0 || selectedRegion.includes(country.region);
+            let isUNMemberFiltered = !filterUNMember || country.unMember;
+            let isIndependentFiltered = !filterIndependent || country.independent;
+            return isRegionFiltered && isUNMemberFiltered && isIndependentFiltered;
+          })}
+        />
       </div>
 
     </div>

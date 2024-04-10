@@ -5,21 +5,34 @@ import { getCountries } from '../../Helpers/getCountries';
 const SearchBar = () => {
 
   const [countriesCount, setCountriesCount] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredCountries, setFilteredCountries] = useState([]);
 
   useEffect(() => {
-    async function FetchData() {
+    async function fetchData() {
       try {
         const countries = await getCountries();
         if (countries) {
+          setFilteredCountries(countries);
           setCountriesCount(countries.length);
         }
       } catch (error) {
-        console.error('Error fetching countries', error)
+        console.error('Error fetching countries', error);
       }
     }
+    fetchData();
+  }, []);
 
-    FetchData();
-  }, [])
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    const filtered = filteredCountries.filter(country =>
+      country.name.common.toLowerCase().includes(query.toLowerCase()) ||
+      country.region.toLowerCase().includes(query.toLowerCase()) ||
+      country.subregion.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredCountries(filtered);
+  };
 
   return (
     <div className="bg-custom-dark-gray flex justify-between items-center rounded-lg">
@@ -34,6 +47,8 @@ const SearchBar = () => {
         <input
           className="p-2 m-2 bg-transparent w-full text-custom-light-gray"
           placeholder="Search by Name, Region, Subregion"
+          value={searchQuery}
+          onChange={handleSearch}
         />
       </div>
 
