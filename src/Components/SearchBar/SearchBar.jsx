@@ -2,36 +2,28 @@ import { useEffect, useState } from 'react';
 import search from '../../Assets/Search.svg'
 import { getCountries } from '../../Helpers/getCountries';
 
-const SearchBar = () => {
+const SearchBar = ({ countries, setFilteredCountries }) => {
 
   const [countriesCount, setCountriesCount] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredCountries, setFilteredCountries] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const countries = await getCountries();
-        if (countries) {
-          setFilteredCountries(countries);
-          setCountriesCount(countries.length);
-        }
-      } catch (error) {
-        console.error('Error fetching countries', error);
-      }
-    }
-    fetchData();
-  }, []);
+    setCountriesCount(countries.length);
+  }, [countries]);
 
   const handleSearch = (e) => {
-    const query = e.target.value;
+    const query = e.target.value.toLowerCase();
     setSearchQuery(query);
-    const filtered = filteredCountries.filter(country =>
-      country.name.common.toLowerCase().includes(query.toLowerCase()) ||
-      country.region.toLowerCase().includes(query.toLowerCase()) ||
-      country.subregion.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredCountries(filtered);
+
+    if (countries && countries.length > 0) {
+      const filtered = countries.filter(country =>
+        country.name.common?.toLowerCase().includes(query) ||
+        country.region?.toLowerCase().includes(query) ||
+        country.subregion?.toLowerCase().includes(query)
+      );
+      setFilteredCountries(filtered);
+      setCountriesCount(filtered.length);
+    }
   };
 
   return (

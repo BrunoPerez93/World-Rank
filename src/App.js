@@ -12,8 +12,7 @@ function App() {
         </div>
 
         <div className='searchContainer m-20'>
-          <SearchBar />
-          <div className='flex p-10'>
+          <div className='p-10'>
             <Filters />
           </div>
         </div>
