@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import search from '../../Assets/Search.svg'
-import { getCountries } from '../../Helpers/getCountries';
 
 const SearchBar = ({ countries, setFilteredCountries }) => {
 

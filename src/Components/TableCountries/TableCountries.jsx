@@ -1,4 +1,4 @@
-
+import { Link } from 'react-router-dom';
 
 export const TableCountries = ({ selectOption, countries }) => {
 
@@ -11,7 +11,7 @@ export const TableCountries = ({ selectOption, countries }) => {
     return 0;
   });
 
-  
+
   return (
     <div className="ml-10 overflow-y-auto max-h-96">
       <table className="w-full ">
@@ -28,12 +28,22 @@ export const TableCountries = ({ selectOption, countries }) => {
           {sortedCountries.map((country, index) => (
             <tr key={index} className="text-custom-light-white">
               <td className="py-3 w-1/5">
-                <img className="rounded-md" src={country.flags.png} alt={country.flags.alt} style={{ width: '50px' }} />
+                <Link to={`/country/${country.cca3}`}>
+                  <img className="rounded-md" src={country.flags.png} alt={country.flags.alt} style={{ width: '50px' }} />
+                </Link>
               </td>
-              <td className="py-3 w-1/5">{country.name.common}</td>
-              <td className="py-3 w-1/5">{country.population}</td>
-              <td className="py-3 w-1/5">{country.area}</td>
-              <td className="py-3 w-1/5">{country.region}</td>
+              <td className="py-3 w-1/5">
+                <Link to={`/country/${country.cca3}`}>{country.name.common}</Link>
+              </td>
+              <td className="py-3 w-1/5">
+                <Link to={`/country/${country.cca3}`}>{country.population}</Link>
+              </td>
+              <td className="py-3 w-1/5">
+                <Link to={`/country/${country.cca3}`}>{country.area}</Link>
+              </td>
+              <td className="py-3 w-1/5">
+                <Link to={`/country/${country.cca3}`}>{country.region}</Link>
+              </td>
             </tr>
           ))}
         </tbody>

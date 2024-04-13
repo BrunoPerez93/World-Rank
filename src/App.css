@@ -3,6 +3,10 @@
   background-position: center;
   background-size: cover;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .logoContainer{
@@ -20,4 +24,12 @@
   background-color: #282B30;
   border-radius: 50px;
   height: 100%;
+}
+
+.country-page .searchContainer {
+  width: 75%;
+}
+
+.country-page-search .searchContainer {
+  width: 75%;
 }
