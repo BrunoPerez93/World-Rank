@@ -5,7 +5,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors:{
+      colors: {
         'custom-gray': '#3C3C3C',
         'custom-dark-gray': '#282B30',
         'custom-light-gray': '#6C727F',
@@ -13,6 +13,19 @@ module.exports = {
         'custom-dark': '#1B1D1F',
       }
     },
+    screens: {
+      'sm': '640px',
+
+      'md': '768px',
+
+      'lg': '1024px',
+
+      'xl': '1280px',
+
+      '2xl': '1536px',
+
+    },
   },
+
   plugins: [],
 }
