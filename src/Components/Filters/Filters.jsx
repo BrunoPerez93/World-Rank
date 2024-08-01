@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getCountries } from "../../Helpers/getCountries";
 import TableCountries from "../TableCountries/TableCountries";
 import ButtonComponnent from "../Common/ButtonComponnent";
@@ -68,27 +68,27 @@ export const Filters = () => {
     });
   };
 
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     let updatedFilters = [...countries];
-
+  
     if (selectedRegion.length > 0) {
       updatedFilters = updatedFilters.filter(country => selectedRegion.includes(country.region));
     }
-
+  
     if (!filterUNMember) {
       updatedFilters = updatedFilters.filter(country => country.unMember);
     }
-
+  
     if (!filterIndependent) {
       updatedFilters = updatedFilters.filter(country => country.independent);
     }
-
+  
     setFilteredCountries(updatedFilters);
-  };
-
+  }, [countries, selectedRegion, filterUNMember, filterIndependent]);
+  
   useEffect(() => {
     applyFilters();
-  }, [countries, selectedRegion, filterUNMember, filterIndependent]);
+  }, [applyFilters]);
 
 
   return (
