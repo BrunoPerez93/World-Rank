@@ -2,7 +2,7 @@ import './Checkbox.css'
 
 const Checkbox = ({ label, checked, onChange }) => {
   return (
-    <div className="pt-2 flex mt-2 items-center" >
+    <div className="pt-2 flex items-center w-full" >
       <input
         className="mr-5 custom-checkbox"
         type="checkbox"

@@ -1,12 +1,14 @@
 .app{
   background-image: url('./Assets/hero-image-wr.jpg');
   background-position: top;
-  background-size: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .logoContainer{
@@ -22,8 +24,8 @@
 
 .searchContainer{
   background-color: #282B30;
-  border-radius: 50px;
-  height: 100%;
+  border-radius: 20px;
+  height: auto;
 }
 
 .country-page .searchContainer {

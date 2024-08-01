@@ -10,7 +10,7 @@ const ButtonComponnent = ({ region, onClick }) => {
   };
 
   return (
-    <button className={`text-custom-light-gray bg-transparent p-5 m-5 rounded-[15px] ${isActive ? 'bg-custom-dark text-custom-light-white' : 'bg-transparent'}`}
+    <button className={`text-custom-light-gray bg-transparent p-2 md:p-5 rounded-[15px] ${isActive ? 'bg-custom-dark text-custom-light-white' : 'bg-transparent'}`}
       onClick={handleClick}
     >
       {region}

@@ -97,11 +97,11 @@ export const Filters = () => {
         countries={countries}
         setFilteredCountries={setFilteredCountries}
       />
-      <div className="w-full flex justify-between">
+      <div className="w-full h-full flex flex-col md:flex-row justify-between">
 
-        <div className="w-1/3">
-          <p className="text-custom-light-gray py-5">Sort by</p>
-          <select className="bg-custom-dark-gray text-custom-light-white px-10 py-5 w-full rounded-[12px] border focus:outline-none" onChange={(e) => setSelectOption(e.target.value)}>
+        <div className="md:w-1/3 w-full">
+          <p className="text-custom-light-gray py-2 w-1/2">Sort by</p>
+          <select className="bg-custom-dark-gray text-custom-light-white p-2 w-full rounded-[12px] border focus:outline-none" onChange={(e) => setSelectOption(e.target.value)}>
             <option value=''>Seleccione..</option>
             <option value='population'>Population</option>
             <option value='area'>Area</option>
@@ -110,7 +110,7 @@ export const Filters = () => {
 
           <div className="pt-5">
             <p className="text-custom-light-gray py-5">Region</p>
-            <div>
+            <div className="grid grid-cols-2">
               <ButtonComponnent region="Americas" onClick={() => handleRegionFilter("Americas")} selected={selectedRegion.includes("Americas")} />
               <ButtonComponnent region="Antarctic" onClick={() => handleRegionFilter("Antarctic")} selected={selectedRegion.includes("Antarctic")} />
               <ButtonComponnent region="Africa" onClick={() => handleRegionFilter("Africa")} selected={selectedRegion.includes("Africa")} />
@@ -121,14 +121,14 @@ export const Filters = () => {
             </div>
           </div>
 
-          <div className="pt-5">
-            <p className="text-custom-light-gray py-5">Status</p>
+          <div className="py-5">
+            <p className="text-custom-light-gray">Status</p>
             <CheckboxGroup labels={["Member of the United Nations", "Independent"]} onChange={handleCheckboxChange} />
           </div>
 
         </div>
 
-        <div className="w-full">
+        <div className="w-full h-auto">
           <TableCountries
             selectOption={selectOption}
             countries={filteredCountries}

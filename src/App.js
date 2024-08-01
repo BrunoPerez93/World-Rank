@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import logo from './Assets/Logo.svg';
 import Homepage from './Pages/Homepage';
@@ -16,13 +16,11 @@ function App() {
 
   return (
     <Router>
-     <div className={`app ${isCountryPage ? "country-page" : ""}`}>
-        <div className='logoContainer'>
-          <img src={logo} alt='logo' />
-        </div>
+     <div className={`app ${isCountryPage ? "country-page" : ""} w-full h-full`}>
+          <img src={logo} alt='logo' className='my-20'/>
 
-        <div className={`searchContainer m-20 ${isCountryPage ? "country-page-search" : ""}`}>
-           <div className='p-10'>
+        <div className={`searchContainer  ${isCountryPage ? "country-page-search" : ""} xl:w-[1100px]`}>
+           <div className='md:p-10 p-5'>
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path="/country/:id" element={<CountryPage />} />
