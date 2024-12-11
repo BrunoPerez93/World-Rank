@@ -1,0 +1,15 @@
+# Dockerfile.dev
+FROM node:18
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+# Exponemos el puerto 3000 para desarrollo
+EXPOSE 3000
+
+# Comando para desarrollo
+CMD ["npm", "start"]
